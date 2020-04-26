@@ -34,9 +34,24 @@ def find_closest(haystack, needle):
         if haystack[i] - needle > needle - haystack[j]:
             return j
     return i
-
-for i in range(10):
-    new_number = random.randint(0, 1000)
+start_time = time.time()
+for i in range(10000):
+    new_number = random.randint(0, 10000)
     bisect.insort(list_numbers, new_number)
-
-print(list_numbers)
+end_time = time.time() - start_time
+print("Inserción demora", end_time)
+print("==BUSQUEDA INDEX()==")
+start_time = time.time()
+try:
+    indice = list_numbers.index(random.randint(0, 1000))
+except:
+    indice = -1
+end_time = time.time() - start_time
+print("Indice", indice)
+print("Busqueda tomo con metodo index", end_time)
+print("==BUSQUEDA INDEX()==")
+start_time = time.time()
+indice = binary_search(random.randint(0, 1000), list_numbers)
+end_time = time.time() - start_time
+print("Indice", indice)
+print("Busqueda con metodo binario", end_time)
