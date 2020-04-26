@@ -1,5 +1,8 @@
 ## Busqueda de list
 import time
+## MODULE BISECT
+import bisect
+import random
 ## Metodo indice
 list_numbers = [12,13,14,15,16,17,18,19,20,22,24,26,27,843]
 
@@ -18,9 +21,6 @@ def binary_search(needle, haystack):
 
 #index = binary_search(13, list_numbers)
 
-## MODULE BISECT
-import bisect
-import random
 ## Encontrar valores cercanos en una lista
 def find_closest(haystack, needle):
     # Localiza el punto de insercion, para que se mantenga ordenado la lista
@@ -35,15 +35,19 @@ def find_closest(haystack, needle):
             return j
     return i
 start_time = time.time()
-for i in range(10000):
-    new_number = random.randint(0, 10000)
-    bisect.insort(list_numbers, new_number)
+test_random = 9000000
+""" for i in range(test_random):
+    new_number = random.randint(0, test_random)
+    bisect.insort(list_numbers, new_number) """
+list_numbers = [random.randint(0, test_random) for i in range(test_random)]
+list_numbers.sort()
 end_time = time.time() - start_time
 print("Inserción demora", end_time)
 print("==BUSQUEDA INDEX()==")
 start_time = time.time()
 try:
-    indice = list_numbers.index(random.randint(0, 1000))
+    for i in range(200):
+        indice = list_numbers.index(random.randint(0, test_random))
 except:
     indice = -1
 end_time = time.time() - start_time
@@ -51,7 +55,8 @@ print("Indice", indice)
 print("Busqueda tomo con metodo index", end_time)
 print("==BUSQUEDA INDEX()==")
 start_time = time.time()
-indice = binary_search(random.randint(0, 1000), list_numbers)
+for i in range(200):
+    indice = binary_search(random.randint(0, test_random), list_numbers)
 end_time = time.time() - start_time
 print("Indice", indice)
 print("Busqueda con metodo binario", end_time)
